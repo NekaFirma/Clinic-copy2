@@ -35,6 +35,7 @@ jobs:
         path: TestResults
       if: ${{ always() }}
     - name: Download a Build Artifact
+      if: ${{ always() }}
       uses: actions/download-artifact@v2.0.10
       with:
         name: dotnet-results
