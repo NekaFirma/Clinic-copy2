@@ -22,6 +22,6 @@ jobs:
     - name: Pack
       run: dotnet pack  ${{ env.HOSPITAL-DLL-PATH }} --configuration Release /p:Version=${VERSION} --no-build --output .
     - name: Push
-      run: dotnet nuget push HOSPITAL.IS.${VERSION}.nupkg --source https://nuget.pkg.github.com/Clinic-copy/index.json --api-key ${GITHUB_TOKEN}
+      run: dotnet nuget push HOSPITAL.IS.${VERSION}.nupkg --source https://nuget.pkg.github.com/Clinic-copy2/index.json --api-key ${GITHUB_TOKEN}
       env:
         GITHUB_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
