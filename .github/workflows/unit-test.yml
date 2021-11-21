@@ -1,0 +1,43 @@
+name: .NET
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    env:
+      config: Release
+      PROJECT: 'HealthCareClinic/Hospital/Hospital.csproj'
+      TEST: 'HealthCareClinic/HospitalTests/HospitalTests.csproj'
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.x
+        
+    - name: Restore dependencies
+      run: dotnet restore $PROJECT
+      
+    - name: Build
+      run: dotnet build $PROJECT --configuration $config --no-restore 
+      
+    - name: Test with dotnet
+      run: dotnet test $TEST --logger "trx" --results-directory "TestResults"
+      
+    - name: Upload dotnet test results
+      uses: actions/upload-artifact@v2
+      with:
+        name: dotnet-results
+        path: TestResults
+      if: ${{ always() }}
+    - uses: dorny/test-reporter@v1
+      if: ${{ always() }}
+      with:
+        artifact: dotnet-results          # artifact name
+        name: JEST Tests                  # Name of the check run which will be created
+        path: '*.trx'                     # Path to test results (inside artifact .zip)
+        reporter: dotnet-trx              # Format of test results
