@@ -26,18 +26,18 @@ jobs:
       run: dotnet build $PROJECT --configuration $config --no-restore 
       
     - name: Test with dotnet
-      run: dotnet test $TEST --logger "trx"
+      run: dotnet test $TEST --logger "trx" --results-directory ResultTests
       
     - name: Upload dotnet test results
       uses: actions/upload-artifact@v2
       with:
         name: dotnet-results
-        path: Test
+        path: ResultTests
       if: ${{ always() }}
     - uses: dorny/test-reporter@v1
       if: ${{ always() }}
       with:
         artifact: dotnet-results          # artifact name
         name: JEST Tests                  # Name of the check run which will be created
-        path: '*.trx'                     # Path to test results (inside artifact .zip)
+        path: '**.trx'                     # Path to test results (inside artifact .zip)
         reporter: dotnet-trx              # Format of test results
