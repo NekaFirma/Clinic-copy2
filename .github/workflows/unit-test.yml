@@ -43,5 +43,5 @@ jobs:
       if: ${{ always() }}
       with:
         name: JEST Tests                  # Name of the check run which will be created
-        path: 'artifacts/dotnet-results/*.trx'                     # Path to test results (inside artifact .zip)
+        path: 'artifacts/dotnet-results/**/*.trx'                     # Path to test results (inside artifact .zip)
         reporter: dotnet-trx              # Format of test results
