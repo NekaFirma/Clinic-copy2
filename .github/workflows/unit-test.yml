@@ -34,6 +34,10 @@ jobs:
         name: dotnet-results
         path: TestResults
       if: ${{ always() }}
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v2.0.10
+      with:
+        name: dotnet-results
     - uses: dorny/test-reporter@v1
       if: ${{ always() }}
       with:
