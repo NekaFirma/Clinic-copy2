@@ -40,8 +40,9 @@ jobs:
       with:
         name: dotnet-results
     - uses: dorny/test-reporter@v1
-      if: ${{ always() }}
+      continue-on-error: true
+      if: success() || failure()
       with:
-        name: JEST Tests                  # Name of the check run which will be created
-        path: 'artifacts/dotnet-results/**/*.trx'                     # Path to test results (inside artifact .zip)
-        reporter: dotnet-trx              # Format of test results
+        path: "artifacts/test-reports/**/*.trx"
+        name: tests
+        reporter: dotnet-trx
