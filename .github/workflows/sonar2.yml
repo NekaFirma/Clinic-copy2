@@ -27,7 +27,4 @@ jobs:
         args: >
           -Dsonar.organization=nekafirma
           -Dsonar.projectKey=NekaFirma_Clinic-copy2
-          -Dsonar.python.coverage.reportPaths=coverage.xml
-          -Dsonar.sources=lib/
-          -Dsonar.tests=../HospitalTests/
           -Dsonar.verbose=true
