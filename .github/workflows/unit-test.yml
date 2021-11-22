@@ -24,7 +24,7 @@ jobs:
       run: dotnet build $PROJECT --configuration $config --no-restore 
       
     - name: Test with dotnet
-      run: dotnet test $TEST --logger:"junit;LogFilePath={$GITHUB_WORKSPACE}/TestResults/test-result.xml"
+      run: dotnet test $TEST --logger:"junit;LogFilePath=$GITHUB_WORKSPACE/TestResults/test-result.xml"
       
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2.2.4
