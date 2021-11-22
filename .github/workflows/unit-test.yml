@@ -26,23 +26,11 @@ jobs:
       run: dotnet build $PROJECT --configuration $config --no-restore 
       
     - name: Test with dotnet
-      run: dotnet test $TEST --logger "trx;LogFileName=TestResults.trx" --results-directory TestResults 
+      run: dotnet test $TEST --logger "trx;LogFileName=results.trx" --results-directory TestResults 
       
-    - name: Upload dotnet test results
-      uses: actions/upload-artifact@v2
+    - name: Upload test results
+      uses: EnricoMi/publish-unit-test-result-action@v1
       with:
-        name: dotnet-results
-        path: TestResults
-      if: ${{ always() }}
-    - name: Download a Build Artifact
-      if: ${{ always() }}
-      uses: actions/download-artifact@v2.0.10
-      with:
-        name: dotnet-results
-    - uses: dorny/test-reporter@v1
-      continue-on-error: true
-      if: success() || failure()
-      with:
-        path: "artifacts/test-reports/**/*.trx"
-        name: tests
-        reporter: dotnet-trx
+        check_name: Test Results
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        files: results.xml
