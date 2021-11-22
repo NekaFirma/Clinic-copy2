@@ -42,4 +42,4 @@ jobs:
       with:
         check_name: Test Results
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        files: artifacts/dotnet-results/
+        files: $GITHUB_WORKSPACE/TestResults/*.xml
