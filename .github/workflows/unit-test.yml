@@ -37,7 +37,7 @@ jobs:
         # The desired behavior if no files are found using the provided path.
       
     - name: Upload test results
-      uses: EnricoMi/publish-unit-test-result-action@v1.14
+      uses: EnricoMi/publish-unit-test-result-action@v1.15
       if: always()
       with:
         check_name: Test Results
