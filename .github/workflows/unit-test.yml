@@ -24,4 +24,4 @@ jobs:
       run: dotnet build $PROJECT --configuration $config --no-restore 
       
     - name: Test with dotnet
-      run: dotnet test $TEST --no-restore --verbosity quiet
+      run: dotnet test $TEST --verbosity quiet
