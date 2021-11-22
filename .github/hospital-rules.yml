@@ -2,3 +2,4 @@ rules:
 - paths: # required - pathnames passed to git diff
   - HealthCareClinic/Hospital/
   - HealthCareClinic/HospitalTests/
+  - HealthCareClinic/Hospital API/
