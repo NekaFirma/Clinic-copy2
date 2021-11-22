@@ -30,6 +30,7 @@ jobs:
         run: echo ${{needs.changedfiles.outputs.ts}}
   build-and-test:
     runs-on: ubuntu-latest
+    needs: lint
     env:
       config: Release
       PROJECT: 'HealthCareClinic/Hospital/Hospital.csproj'
