@@ -33,7 +33,7 @@ jobs:
         # Artifact name
         name: dotnet-results
         # A file, directory or wildcard pattern that describes what to upload
-        path: TestResults/test-results.xml
+        path: TestResults
         # The desired behavior if no files are found using the provided path.
       
     - name: Upload test results
