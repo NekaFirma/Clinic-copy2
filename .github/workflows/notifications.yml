@@ -2,10 +2,10 @@ name: Discord Notification
 
 on:
   push:
-    branches: [ develop, master ]
+    branches: [ develop, main ]
   pull_request: 
     types: [ opened ]
-    branches: [ develop ]
+    branches: [ develop, main]
     
 jobs:
   push-notification:
