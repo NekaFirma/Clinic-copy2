@@ -24,7 +24,7 @@ jobs:
       run: dotnet build $PROJECT --configuration $config --no-restore 
       
     - name: Test with dotnet
-      run: dotnet test $TEST --logger:"junit;LogFilePath=test-result.xml" --results-directory "TestResults"
+      run: dotnet test $TEST --logger:"junit;LogFilePath=TestResults/test-result.xml"
       
     - name: Upload test results
       uses: EnricoMi/publish-unit-test-result-action@v1.14
