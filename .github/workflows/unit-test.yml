@@ -32,4 +32,4 @@ jobs:
       with:
         check_name: Test Results
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        files: /**/*.xml
+        files: test-result.xml
