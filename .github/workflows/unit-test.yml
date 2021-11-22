@@ -42,4 +42,4 @@ jobs:
       with:
         check_name: Test Results
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        files: /home/runner/work/Clinic-copy2/Clinic-copy2/TestResults/*.xml
+        files: /**/*.xml
