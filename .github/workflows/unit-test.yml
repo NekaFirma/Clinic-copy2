@@ -1,9 +1,9 @@
-name: .NET
+name: Hospital Unit Test
 on:
   pull_request:
     branches: [ main, develop ]
 jobs:
-  changedfiles:
+  build-and-test:
     runs-on: ubuntu-latest
     env:
       config: Release
