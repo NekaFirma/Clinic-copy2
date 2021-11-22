@@ -11,9 +11,6 @@ jobs:
         uses: Amadevus/pwsh-script@v2.0.1
         with:
           script: |
-            $reason = "$(Build.Reason)"
-            if($reason -eq "PullRequest")
-            {
                 echo "Pipeline triggered by PR: checking which files were changed."
                 $files=$(git diff HEAD HEAD~ --name-only)
                 $paths = $env:PATHS -split ' '
@@ -39,14 +36,6 @@ jobs:
                     echo "Build will not execute."
                     Write-Host "##vso[task.setvariable variable=shouldBuild;isOutput=true]No"
                 }
-            }
-            else
-            {
-                echo "Pipeline not triggered by PR."
-                echo "Build will execute."
-                Write-Host "##vso[task.setvariable variable=shouldBuild;isOutput=true]Yes"
-            }
-
   build-and-test:
     runs-on: ubuntu-latest
     needs: changedfiles
