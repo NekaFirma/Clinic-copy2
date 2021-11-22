@@ -5,37 +5,31 @@ on:
 jobs:
   changedfiles:
     runs-on: ubuntu-latest
-    # Map a step output to a job output
-    steps:
-      - uses: dorny/paths-filter@v2
-        id: changes
-        with:
-          filters: |
-            src:
-              - 'HealthCareClinic/Hospital/**'
-              - 'HealthCareClinic/HospitalTests/**'
-
-  build-and-test:
-    if: steps.changes.outputs.src == 'true'
-    runs-on: ubuntu-latest
-    needs: changedfiles
     env:
       config: Release
       PROJECT: 'HealthCareClinic/Hospital/Hospital.csproj'
       TEST: 'HealthCareClinic/HospitalTests/HospitalTests.csproj'
+    # Map a step output to a job output
     steps:
-    - uses: actions/checkout@v2
-    
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.1.x
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 100
+      - uses: lostick/path-filtering-action@main
         
-    - name: Restore dependencies
-      run: dotnet restore $PROJECT
-      
-    - name: Build
-      run: dotnet build $PROJECT --configuration $config --no-restore 
-      
-    - name: Test with dotnet
-      run: dotnet test $TEST --verbosity quiet
+      - name: Setup .NET
+        if: env.DIFF_DETECTED == 'true'
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.x
+
+      - name: Restore dependencies
+        if: env.DIFF_DETECTED == 'true'
+        run: dotnet restore $PROJECT
+
+      - name: Build
+        if: env.DIFF_DETECTED == 'true'
+        run: dotnet build $PROJECT --configuration $config --no-restore 
+
+      - name: Test with dotnet
+        if: env.DIFF_DETECTED == 'true'
+        run: dotnet test $TEST --verbosity quiet
