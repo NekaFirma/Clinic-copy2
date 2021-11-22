@@ -24,3 +24,11 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       with:
         projectBaseDir: HealthCareClinic/Hospital
+        args: >
+          -Dsonar.organization=nekafirma
+          -Dsonar.projectKey=NekaFirma_Clinic-copy2
+          -Dsonar.python.coverage.reportPaths=coverage.xml
+          -Dsonar.sources=lib/
+          -Dsonar.test.exclusions=tests/**
+          -Dsonar.tests=tests/
+          -Dsonar.verbose=true
