@@ -42,10 +42,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          PROJECT: 'HealthCareClinic/Hospital/Hospital.csproj'
         shell: powershell
         run: |
          .\.sonar\scanner\dotnet-sonarscanner begin /k:"NekaFirma_Clinic-copy2" /o:"nekafirma" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build "HealthCareClinic/HealthCareClinic.sln"
+          dotnet build HealthCareClinic/Hospital/Hospital.csproj
          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
