@@ -24,6 +24,7 @@ namespace Hospital.Schedule.Service
 
         public IEnumerable<Survey> GetAll()
         {
+            int i = 0;
             return (List<Survey>)surveyRepository.GetAll();
         }
 
